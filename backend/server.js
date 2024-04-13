@@ -24,12 +24,26 @@ app.use(express.json());
 app.use(cors());
 
 // Endpoint para obtener datos de la base de datos
-app.get('/api/getdata', async (req, res) => {
+app.get('/api/user', async (req, res) => {
   try {
     // Crear una conexión a la base de datos
     const pool = await sql.connect(dbConfig);
     // Consulta SQL para obtener datos
     const result = await pool.request().query('SELECT * FROM usuario');
+    // Enviar los datos obtenidos como respuesta
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error al obtener datos:', error);
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
+app.get('/api/tpagos', async (req, res) => {
+  try {
+    // Crear una conexión a la base de datos
+    const pool = await sql.connect(dbConfig);
+    // Consulta SQL para obtener datos
+    const result = await pool.request().query('SELECT * FROM tablapagos');
     // Enviar los datos obtenidos como respuesta
     res.json(result.recordset);
   } catch (error) {

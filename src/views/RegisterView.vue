@@ -1,9 +1,11 @@
 <script setup lang="ts">
 
+  import register from '@/components/RegisterItems.vue'
+  
 </script>
 
 <template>
   <main>
-    <login />
+    <register/>
   </main>
 </template>
