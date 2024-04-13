@@ -14,5 +14,28 @@ export default{
             console.error(error);
             return[];
         }
+    },
+    async registerUser(name: string, apellido: string, email: string, password: string): Promise<void> {
+      try {
+        const userData = { name, apellido, email, password };
+        /* console.log('Datos a enviar:', userData);  */
+
+        const response = await fetch(`${API_URL}/insertdata/`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(userData)
+        });
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.message || 'No se pudo registrar el usuario');
+        }
+        const responseData = await response.json();
+        console.log('Respuesta del servidor:', responseData);  
+      } catch (error) {
+        console.error('Error al registrar el usuario:', error);
+        throw error;  // Lanzar el error para manejarlo en el componente o en otra parte de la aplicación
+      }
     }
 }

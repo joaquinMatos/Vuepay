@@ -4,7 +4,7 @@ export default interface Tpagos {
     fechapago: Date;
     referencia: string;
     monto: number;
-    statuspagos: boolean;
-    Tipopagos: string;
     id_user: number;
+    statuspago: boolean;
+    Tipopagos: string;
 }

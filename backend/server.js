@@ -52,21 +52,18 @@ app.get('/api/tpagos', async (req, res) => {
   }
 });
 
-app.post('/api/insertdata', async (req, res) => {
+app.post('/api/insertdata/', async (req, res) => {
   try {
-
-    const { Nombre, Apellido, email, password } = req.body;
+    const { name, apellido, email, password } = req.body;
     const folio = "3YB9K7X2L";
-    // Validar que se hayan proporcionado todos los campos necesarios
-    if (!folio || !Nombre || !Apellido || !email || !password) {
+    if (!folio || !name || !apellido || !email || !password) {
       return res.status(400).json({ message: "Faltan campos obligatorios" });
     }
     // Crear una conexión a la base de datos
     const pool = await sql.connect(dbConfig);
     // Consulta SQL para insertar datos
     const query = `
-      INSERT INTO usuario (folio, Nombre, Apellido, email, passwordU)
-      VALUES ('${folio}','${Nombre}', '${Apellido}', '${email}', '${password}')
+      INSERT INTO usuario VALUES ('${folio}','${name}', '${apellido}', '${email}', '${password}')
     `;
     // Ejecutar la consulta
     await pool.request().query(query);
