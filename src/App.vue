@@ -18,6 +18,12 @@ import { RouterLink, RouterView } from 'vue-router'
         <div>
           <RouterLink to="/register">crear pagos</RouterLink>
         </div>
+        <div>
+          <RouterLink to="/login"> Login </RouterLink>
+        </div>
+        <div>
+          <RouterLink to="/Gpago"> Generar pagos </RouterLink>
+        </div>
       </nav>
     </div>
   </header>

@@ -4,7 +4,7 @@ const cors = require('cors'); // Importa el paquete cors
 
 // Configuración de la conexión a la base de datos
 const dbConfig = {
-  server: "JOAQUIN\\SQLEXPRESS",
+  server: "localhost",
   database: "vuepay",
   user: "sa",
   password: "1234",
@@ -73,6 +73,21 @@ app.post('/api/insertdata/', async (req, res) => {
     res.status(500).send('Error al insertar datos');
   }
 });
+
+app.get('/api/login', async (req, res) => {
+  try {
+    // Crear una conexión a la base de datos
+    const pool = await sql.connect(dbConfig);
+    // Consulta SQL para obtener datos
+    const result = await pool.request().query('SELECT * FROM usuario');
+    // Enviar los datos obtenidos como respuesta
+    res.json(result.recordset);
+  } catch (error) {
+    console.error('Error al obtener datos:', error);
+    res.status(500).send('Error al obtener datos');
+  }
+});
+
 
 
 // Iniciar el servidor en el puerto especificado
